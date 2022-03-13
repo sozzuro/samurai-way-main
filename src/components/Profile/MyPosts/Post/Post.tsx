@@ -1,6 +1,7 @@
 import styles from "./Post.module.css";
 import React from "react";
-import {postType} from "../../../../index";
+import {postType} from "../../../../redux/state";
+
 
 function Post(props: postType) {
     return (

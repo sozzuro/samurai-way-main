@@ -1,6 +1,7 @@
 import React from "react";
 import styles from './Message.module.css'
-import {messagesType} from "../../../index";
+import {messagesType} from "../../../redux/state";
+
 
 function Message(props: messagesType) {
     return <div className={styles.message}>{props.message}</div>
