@@ -1,11 +1,8 @@
 import React from "react";
 import styles from './Message.module.css'
+import {messagesType} from "../Dialogs";
 
-type MessagePropsType = {
-    message: string
-}
-
-function Message(props: MessagePropsType) {
+function Message(props: messagesType) {
     return <div className={styles.message}>{props.message}</div>
 }
 

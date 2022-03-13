@@ -4,7 +4,9 @@ import styles from './Header.module.css'
 function Header() {
     return (
         <header className={styles.header}>
-            <img src="https://images.ru.prom.st/653840423_w600_h600_zachem-kompanii-nuzhen.jpg" alt="logo"/>
+            <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/ZDF_logo%21_Logo_2021.svg/640px-ZDF_logo%21_Logo_2021.svg.png"
+                alt="logo"/>
         </header>
     )
 }
