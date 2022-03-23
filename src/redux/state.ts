@@ -1,3 +1,5 @@
+import {v1} from "uuid";
+
 export type dialogsType = {
     id: number,
     name: string
@@ -7,7 +9,7 @@ export type messagesType = {
     message: string,
 }
 export type postType = {
-    id: number,
+    id: string,
     message: string,
     likesCount: number
 }
@@ -26,8 +28,8 @@ export type mainStateType = {
 let state = {
     profilePage: {
         posts: [
-            {id: 1, message: 'It\'s my first message!', likesCount: 3},
-            {id: 2, message: 'Hello! How are you?', likesCount: 32}
+            {id: '1', message: 'It\'s my first message!', likesCount: 3},
+            {id: '2', message: 'Hello! How are you?', likesCount: 32}
         ]
     },
     dialogPage: {
@@ -45,6 +47,16 @@ let state = {
             {id: 3, message: 'I\'m fine!'},
         ]
     }
+}
+
+export const addPost = (postText: string) => {
+    const newPost: postType = {
+        id: v1(),
+        message: postText,
+        likesCount: 3
+    }
+
+    state.profilePage.posts.push(newPost)
 }
 
 export default state;

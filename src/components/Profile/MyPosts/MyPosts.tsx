@@ -1,10 +1,11 @@
 import styles from "./MyPosts.module.css";
 import React, {RefObject} from "react";
 import Post from "./Post/Post";
-import {postType} from "../../../redux/state";
+import {addPost, postType} from "../../../redux/state";
 
 type myPostsPropsType = {
     posts: Array<postType>
+    addPost: (postText: string) => void
 }
 
 function MyPosts(props: myPostsPropsType) {
@@ -12,7 +13,7 @@ function MyPosts(props: myPostsPropsType) {
     const postElements = props.posts.map(p => <Post id={p.id} message={p.message} likesCount={p.likesCount}/>)
     const newPostElement = React.createRef<HTMLTextAreaElement>();
     const onClickAddPostHandler = () => {
-        alert(newPostElement.current?.value)
+        props.addPost(newPostElement.current ? newPostElement.current.value : '')
     }
 
     return (
