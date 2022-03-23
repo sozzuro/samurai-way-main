@@ -16,23 +16,21 @@ type appPropsType = {
 
 function App(props: appPropsType) {
     return (
-        <BrowserRouter>
-            <div className='app-wrapper'>
-                <Header/>
-                <Navbar/>
-                <div className='app-wrapper-content'>
-                    {/*<Route path='/profile' component={Profile} />
+        <div className='app-wrapper'>
+            <Header/>
+            <Navbar/>
+            <div className='app-wrapper-content'>
+                {/*<Route path='/profile' component={Profile} />
                     <Route exact path='/dialogs' component={Dialogs} />*/}
 
-                    <Route path='/profile' render={() => <Profile state={props.state.profilePage}/>}/>
-                    <Route exact path='/dialogs'
-                           render={() => <Dialogs state={props.state.dialogPage}/>}/>
-                    <Route path='/music' component={Music}/>
-                    <Route path='/news' component={News}/>
-                    <Route path='/settings' component={Settings}/>
-                </div>
+                <Route path='/profile' render={() => <Profile state={props.state.profilePage}/>}/>
+                <Route exact path='/dialogs'
+                       render={() => <Dialogs state={props.state.dialogPage}/>}/>
+                <Route path='/music' component={Music}/>
+                <Route path='/news' component={News}/>
+                <Route path='/settings' component={Settings}/>
             </div>
-        </BrowserRouter>
+        </div>
     );
 }
 

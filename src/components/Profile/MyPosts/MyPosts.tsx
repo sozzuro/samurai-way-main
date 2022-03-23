@@ -1,5 +1,5 @@
 import styles from "./MyPosts.module.css";
-import React from "react";
+import React, {RefObject} from "react";
 import Post from "./Post/Post";
 import {postType} from "../../../redux/state";
 
@@ -10,16 +10,20 @@ type myPostsPropsType = {
 function MyPosts(props: myPostsPropsType) {
 
     const postElements = props.posts.map(p => <Post id={p.id} message={p.message} likesCount={p.likesCount}/>)
+    const newPostElement = React.createRef<HTMLTextAreaElement>();
+    const onClickAddPostHandler = () => {
+        alert(newPostElement.current?.value)
+    }
 
     return (
         <div className={styles.postsBlock}>
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea></textarea>
+                    <textarea ref={newPostElement}></textarea>
                 </div>
                 <div>
-                    <button>Add post</button>
+                    <button onClick={onClickAddPostHandler}>Add post</button>
                 </div>
             </div>
             <div className={styles.posts}>
