@@ -1,5 +1,8 @@
 import {v1} from "uuid";
-import {renderTree} from "../render";
+
+let renderTree = (state: mainStateType) => {
+    console.log('State Rendered')
+}
 
 export type dialogsType = {
     id: number,
@@ -67,6 +70,10 @@ export const addPost = () => {
 export const updateNewPostText = (newText: string) => {
     state.profilePage.newPostText = newText
     renderTree(state)
+}
+
+export const subscriber = (observer: (state: mainStateType) => void) => {
+    renderTree = observer;
 }
 
 export default state;
