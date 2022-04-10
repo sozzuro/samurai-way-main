@@ -1,5 +1,7 @@
 import {v1} from "uuid";
 
+const ADD_POST = "ADD-POST";
+const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 
 export type dialogsType = {
     id: number,
@@ -35,16 +37,20 @@ export type StoreType = {
     subscriber: (observer: (state: mainStateType) => void) => void
 }
 
-type addPostActionType = {
-    type: "ADD-POST"
+export type ActionsType = ReturnType<typeof addPostAC> | ReturnType<typeof changeNewTextAC>
+
+export const addPostAC = () => {
+    return {
+        type: ADD_POST
+    } as const
 }
 
-type changeNewTextActionType = {
-    type: "UPDATE-NEW-POST-TEXT"
-    newText: string
+export const changeNewTextAC = (newText: string) => {
+    return {
+        type: UPDATE_NEW_POST_TEXT,
+        newText
+    } as const
 }
-
-export type ActionsType = addPostActionType | changeNewTextActionType
 
 const store: StoreType = {
     _state: {
@@ -83,7 +89,7 @@ const store: StoreType = {
     },
 
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
+        if (action.type === ADD_POST) {
             const newPost: postType = {
                 id: v1(),
                 message: this._state.profilePage.newPostText,
@@ -93,7 +99,7 @@ const store: StoreType = {
             this._state.profilePage.posts.push(newPost)
             this._state.profilePage.newPostText = ''
             this._callSubscriber(this._state)
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+        } else if (action.type === UPDATE_NEW_POST_TEXT) {
             this._state.profilePage.newPostText = action.newText
             this._callSubscriber(this._state)
         }
