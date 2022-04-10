@@ -31,10 +31,20 @@ export type StoreType = {
     _state: mainStateType
     getState: () => mainStateType
     _callSubscriber: (state: mainStateType) => void
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
+    dispatch: (action: ActionsType) => void
     subscriber: (observer: (state: mainStateType) => void) => void
 }
+
+type addPostActionType = {
+    type: "ADD-POST"
+}
+
+type changeNewTextActionType = {
+    type: "UPDATE-NEW-POST-TEXT"
+    newText: string
+}
+
+export type ActionsType = addPostActionType | changeNewTextActionType
 
 const store: StoreType = {
     _state: {
@@ -61,30 +71,33 @@ const store: StoreType = {
             ]
         }
     },
+
     getState() {
         return this._state
     },
     _callSubscriber(state: mainStateType) {
         console.log('State Rendered')
     },
-    addPost() {
-        const newPost: postType = {
-            id: v1(),
-            message: this._state.profilePage.newPostText,
-            likesCount: 0
-        }
-
-        this._state.profilePage.posts.push(newPost)
-        this._state.profilePage.newPostText = ''
-        this._callSubscriber(this._state)
-    },
-    updateNewPostText(newText: string) {
-        this._state.profilePage.newPostText = newText
-        this._callSubscriber(this._state)
-    },
     subscriber(observer: (state: mainStateType) => void) {
         this._callSubscriber = observer;
     },
+
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            const newPost: postType = {
+                id: v1(),
+                message: this._state.profilePage.newPostText,
+                likesCount: 0
+            }
+
+            this._state.profilePage.posts.push(newPost)
+            this._state.profilePage.newPostText = ''
+            this._callSubscriber(this._state)
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePage.newPostText = action.newText
+            this._callSubscriber(this._state)
+        }
+    }
 }
 
 export default store;
